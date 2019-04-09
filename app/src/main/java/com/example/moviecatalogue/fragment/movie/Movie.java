@@ -33,9 +33,12 @@ public class Movie implements Parcelable {
     @SerializedName("release_date")
     @Expose
     private String releaseDate;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
 
     public Movie (double voteAverage, String title, double popularity, String posterPath, String originalLanguage, String originalTitle,
-                  String overview, String releaseDate){
+                  String overview, String releaseDate, Integer id){
         this.voteAverage = voteAverage;
         this.title = title;
         this.popularity = popularity;
@@ -44,7 +47,13 @@ public class Movie implements Parcelable {
         this.originalTitle = originalTitle;
         this.overview = overview;
         this.releaseDate = releaseDate;
+        this.id = id;
     }
+
+    public Movie() {
+
+    }
+
     public Double getVoteAverage() {
         return voteAverage;
     }
@@ -108,7 +117,13 @@ public class Movie implements Parcelable {
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     @Override
     public int describeContents() {
@@ -125,6 +140,7 @@ public class Movie implements Parcelable {
         dest.writeString(this.originalTitle);
         dest.writeString(this.overview);
         dest.writeString(this.releaseDate);
+        dest.writeInt(this.id);
     }
 
     protected Movie(Parcel in) {
@@ -136,6 +152,7 @@ public class Movie implements Parcelable {
         this.originalTitle = in.readString();
         this.overview = in.readString();
         this.releaseDate = in.readString();
+        this.id = in.readInt();
     }
 
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
@@ -149,4 +166,6 @@ public class Movie implements Parcelable {
             return new Movie[size];
         }
     };
+
+
 }

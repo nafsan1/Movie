@@ -14,12 +14,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.activity.DetailActivity;
-import com.example.moviecatalogue.fragment.movie.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.moviecatalogue.MainActivity.EXTRA_MOVIES;
+import static com.example.moviecatalogue.MainActivity.TYPE_TV_INTENT;
 
 public class AdapterTv extends RecyclerView.Adapter<AdapterTv.CategoryViewHolder> {
     private Context context;
@@ -59,7 +59,7 @@ public class AdapterTv extends RecyclerView.Adapter<AdapterTv.CategoryViewHolder
             public void onClick(View v) {
                 Intent i = new Intent(context, DetailActivity.class);
                 i.putExtra(EXTRA_MOVIES, m);
-                i.putExtra("code", 102);
+                i.putExtra("code", TYPE_TV_INTENT);
                 context.startActivity(i);
             }
         });

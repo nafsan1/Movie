@@ -43,6 +43,11 @@ public class Tv implements Parcelable {
         this.overview = overview;
         this.posterPath = posterPath;
     }
+
+    public Tv() {
+
+    }
+
     public String getOriginalName() {
         return originalName;
     }

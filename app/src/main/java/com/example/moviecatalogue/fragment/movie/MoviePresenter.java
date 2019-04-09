@@ -1,10 +1,6 @@
 package com.example.moviecatalogue.fragment.movie;
 
-import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Toast;
+
 
 import com.example.moviecatalogue.api.BaseApiService;
 import com.example.moviecatalogue.api.UtilsAPI;
@@ -46,7 +42,8 @@ public class MoviePresenter {
                                     response.body().getMovies().get(i).getOriginalLanguage(),
                                     response.body().getMovies().get(i).getOriginalTitle(),
                                     response.body().getMovies().get(i).getOverview(),
-                                    response.body().getMovies().get(i).getReleaseDate());
+                                    response.body().getMovies().get(i).getReleaseDate(),
+                                    response.body().getMovies().get(i).getId());
                             listMovie.add(m);
 
                         }
@@ -56,8 +53,9 @@ public class MoviePresenter {
                         view.hideProgress();
 
                     } catch (Exception e) {
-                        view.onAddError(e.getMessage());
+                       // view.onAddError("Server Error");
                         view.hideProgress();
+                        e.printStackTrace();
 
                     }
 

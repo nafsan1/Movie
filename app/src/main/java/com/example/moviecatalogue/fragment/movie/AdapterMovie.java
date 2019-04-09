@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.moviecatalogue.R;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.moviecatalogue.MainActivity.EXTRA_MOVIES;
+import static com.example.moviecatalogue.MainActivity.TYPE_MOVIE_INTENT;
 
 public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.CategoryViewHolder> {
     private Context context;
@@ -53,13 +55,12 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.CategoryView
         Glide.with(context)
                 .load(poster)
                 .into(holder.img_movie_poster);
-
         holder.linear_movie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, DetailActivity.class);
                 i.putExtra(EXTRA_MOVIES, m);
-                i.putExtra("code", 101);
+                i.putExtra("code", TYPE_MOVIE_INTENT);
                 context.startActivity(i);
             }
         });

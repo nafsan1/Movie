@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Catalog Film</string>
-    <string name="title_home">Home</string>
     <string name="movie">Film</string>
     <string name="tv_show">Serial Tv</string>
 
     <string name="more_info">Info Lebih Lanjut</string>
     <string name="change_language_settings">Ubah Pengaturan Bahasa</string>
+    <string name="add">Berhasil ditambahkan</string>
+    <string name="delete">Berhasil dihapus</string>
+    <string name="favourite">Favorit</string>
+    <string name="failed">Gagal</string>
+    <string name="no_favourite_movie">Tidak ada film favorit</string>
+    <string name="no_favourite_tv">Tidak ada acara tv favorit</string>
 
 </resources>

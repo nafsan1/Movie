@@ -1,8 +1,5 @@
 package com.example.moviecatalogue.fragment.tv;
 
-import android.view.View;
-import android.widget.Toast;
-
 import com.example.moviecatalogue.api.BaseApiService;
 import com.example.moviecatalogue.api.UtilsAPI;
 
@@ -53,14 +50,15 @@ public class TvPresenter {
 
                 } catch (Exception e) {
                     view.hideProgress();
-                    view.onAddError(e.getMessage());
+                    //view.onAddError("Server Error");
+                    e.printStackTrace();
                 }
             }
 
             @Override
             public void onFailure(Call<TvDataResponse> call, Throwable t) {
                 view.hideProgress();
-                view.onAddError(t.getMessage());
+                view.onAddError("Server Error");
             }
         });
     }
