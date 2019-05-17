@@ -2,6 +2,8 @@ package com.example.moviecatalogue.fragment.favourite.tv;
 
 
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,12 +15,15 @@ import android.widget.Toast;
 
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.fragment.movie.AdapterMovie;
+import com.example.moviecatalogue.fragment.movie.Movie;
 import com.example.moviecatalogue.fragment.tv.AdapterTv;
 import com.example.moviecatalogue.fragment.tv.Tv;
 import com.example.moviecatalogue.sqlite.TvMovieHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.moviecatalogue.MainActivity.EXTRA_CATALOG;
 
 
 public class TvFragmentFav extends Fragment {
@@ -32,6 +37,7 @@ public class TvFragmentFav extends Fragment {
     private List<Tv> list = new ArrayList<>();
     private TvMovieHelper tvMovieHelper;
     private TextView txt_tv;
+    private  AdapterTv adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +48,15 @@ public class TvFragmentFav extends Fragment {
         txt_tv = view.findViewById(R.id.txt_tv);
         tvMovieHelper = TvMovieHelper.getInstance(getContext().getApplicationContext());
         tvMovieHelper.open();
+        adapter = new AdapterTv(getActivity());
+        if (savedInstanceState == null) {
+            adapter.setListMovie(tvMovieHelper.getListTv());
+        } else {
+            List<Tv> list = savedInstanceState.getParcelableArrayList(EXTRA_CATALOG);
+            if (list != null) {
+                adapter.setListMovie(list);
+            }
+        }
         return view;
     }
 
@@ -52,15 +67,12 @@ public class TvFragmentFav extends Fragment {
     }
 
     private void initComponent() {
-        list.clear();
-        list.addAll(tvMovieHelper.getListTv());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recycleView.setLayoutManager(layoutManager);
-        AdapterTv adapter = new AdapterTv(getActivity());
-        adapter.setListMovie(list);
+
         recycleView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        if (list.size() > 0){
+        if (tvMovieHelper.getListTv().size() > 0){
             txt_tv.setVisibility(View.GONE);
         }else {
             txt_tv.setVisibility(View.VISIBLE);
@@ -73,5 +85,9 @@ public class TvFragmentFav extends Fragment {
         tvMovieHelper.close();
     }
 
-
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(EXTRA_CATALOG, (ArrayList<? extends Parcelable>) adapter.getListMovie());
+    }
 }

@@ -12,6 +12,7 @@
     <string name="favourite">Favourite</string>
     <string name="no_favourite_movie">No Favourite Movie</string>
     <string name="no_favourite_tv">No Favourite Tv Shows</string>
-
+    <string name="daily_message">What do you want to watch today?</string>
+    <string name="settings">Settings</string>
 
 </resources>

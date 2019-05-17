@@ -2,8 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/search"
+        android:title="Search"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_search_white_24dp" />
+    <item
         android:id="@+id/eng"
         android:title="@string/change_language_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/daily_reminder"
+        android:title="Settings"
         app:showAsAction="never" />
 
 </menu>

@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.moviecatalogue.R;
+import com.example.moviecatalogue.activity.DailyReminderActivity;
 import com.example.moviecatalogue.fragment.favourite.movies.MovieFragmentFav;
 import com.example.moviecatalogue.fragment.favourite.tv.TvFragmentFav;
 
@@ -67,15 +68,22 @@ public class FavouriteFragment extends Fragment {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.eng){
+       /* if (item.getItemId() == R.id.eng){
             Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
             startActivity(mIntent);
+        }else if (item.getItemId() == R.id.daily_reminder){
+            Intent intent = new Intent(getActivity(), DailyReminderActivity.class);
+            startActivity(intent);
+        }else if (item.getItemId() == R.id.search){
+            item.setVisible(false);
         }
+        item.setChecked(false);*/
+
         return super.onOptionsItemSelected(item);
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        ((AppCompatActivity)getActivity()).getMenuInflater().inflate(R.menu.menu_main, menu);
+        //((AppCompatActivity)getActivity()).getMenuInflater().inflate(R.menu.menu_main, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

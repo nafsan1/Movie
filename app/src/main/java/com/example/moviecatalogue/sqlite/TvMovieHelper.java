@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.moviecatalogue.fragment.movie.Movie;
 import com.example.moviecatalogue.fragment.tv.Tv;
@@ -82,6 +83,24 @@ public class TvMovieHelper {
         String sql = "SELECT * FROM " + TABLE_MOVIE + " WHERE " + ID_MOVIE + " ='" + id + "'";
         return database.rawQuery(sql, null);
 
+    }
+
+    public List<String> getAllPosterMovie() {
+        List<String> list = new ArrayList<>();
+        String sql = "SELECT " + POSTER_PATH_MOVIE + " FROM " + TABLE_MOVIE + " Union ALL SELECT " + POSTER_PATH_TV + " FROM " + TABLE_TV;
+        Cursor c = database.rawQuery(sql, null);
+
+        c.moveToFirst();
+        if (c.getCount() > 0) {
+            do {
+                String poster_path = c.getString(c.getColumnIndex(POSTER_PATH_MOVIE));
+                list.add(poster_path);
+                c.moveToNext();
+            }
+            while (!c.isAfterLast());
+        }
+        c.close();
+        return list;
     }
 
     public List<Movie> getListMovie() {
@@ -188,5 +207,29 @@ public class TvMovieHelper {
         return database.delete(TABLE_MOVIE, ID_MOVIE + " ='"
                 + id
                 + "'", null);
+    }
+
+    public Cursor queryByIdProvider(String id) {
+        return database.query(TABLE_MOVIE, null
+                , _ID + "=?"
+                , new String[]{id}
+                , null
+                , null,
+                null, null);
+    }
+    public Cursor queryProvider(){
+        return database.query(TABLE_MOVIE,null,
+                null,
+                null,
+                null,
+                null
+        ,_ID + " ASC");
+    }
+
+    public long insertProvider(ContentValues values){
+        return database.insert(TABLE_MOVIE, null, values);
+    }
+    public int deletProvider(String id){
+        return database.delete(DATABASE_TABLE,_ID+ " =?", new String[]{id});
     }
 }

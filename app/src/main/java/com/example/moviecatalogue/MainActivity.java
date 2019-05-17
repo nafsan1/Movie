@@ -4,7 +4,10 @@ package com.example.moviecatalogue;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.ContentObserver;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -19,11 +22,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.moviecatalogue.fragment.favourite.FavouriteFragment;
 import com.example.moviecatalogue.fragment.favourite.movies.MovieFragmentFav;
 import com.example.moviecatalogue.fragment.movie.MovieFragment;
 import com.example.moviecatalogue.fragment.tv.TvFragment;
+import com.example.moviecatalogue.notification.AlarmReceiver;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 @SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     public static int TYPE_TV_INTENT = 101;
     public static int TYPE_MOVIE_INTENT = 102;
     private FrameLayout frameLayout;
+    public static final String EXTRA_CATALOG = "EXTRA_CATALOG";
+    private DataObserver myObserver;
+    private static HandlerThread handlerThread;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -92,10 +104,15 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.content_main, movieFragment);
             fragmentTransaction.commit();
         }
+
+
+
+
         //initToolbar();
         frameLayout = findViewById(R.id.content_main);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
     }
 
 
@@ -104,5 +121,12 @@ public class MainActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
+    }
+    public static class DataObserver extends ContentObserver {
+        final Context context;
+        public DataObserver(Handler handler, Context context) {
+            super(handler);
+            this.context = context;
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.example.moviecatalogue.fragment.tv;
 
 import com.example.moviecatalogue.api.BaseApiService;
 import com.example.moviecatalogue.api.UtilsAPI;
+import com.example.moviecatalogue.fragment.movie.MovieDataResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,48 @@ public class TvPresenter {
         this.listTvResponse = listTvResponse;
     }
 
+    void searchDataTv(String name){
+        view.showProgress();
+        listTv.clear();
+        listTvResponse.clear();
+        BaseApiService mApiService = UtilsAPI.getApiService();
+        mApiService.getSearchTv(name).enqueue(new Callback<TvDataResponse>() {
+            @Override
+            public void onResponse(Call<TvDataResponse> call, Response<TvDataResponse> response) {
+                try {
+                    int total = response.body().getTv().size();
+                    for (int i = 0; i < total; i++) {
+                        Tv tv = new Tv(
+                                response.body().getTv().get(i).getOriginalName(),
+                                response.body().getTv().get(i).getOriginalLanguage(),
+                                response.body().getTv().get(i).getName(),
+                                response.body().getTv().get(i).getFirstAirDate(),
+                                response.body().getTv().get(i).getId(),
+                                response.body().getTv().get(i).getVoteAverage(),
+                                response.body().getTv().get(i).getOverview(),
+                                response.body().getTv().get(i).getPosterPath()
+                        );
+                        listTv.add(tv);
+                    }
+                    TvDataResponse tvDataResponse = new TvDataResponse(listTv);
+                    listTvResponse.add(tvDataResponse);
+                    view.hideProgress();
+                    view.getDataMovie(listTv);
 
+                } catch (Exception e) {
+                    view.hideProgress();
+                    //view.onAddError("Server Error");
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TvDataResponse> call, Throwable t) {
+                view.hideProgress();
+                view.onAddError("Server Error");
+            }
+        });
+    }
     void showData() {
         listTvResponse.clear();
         view.showProgress();

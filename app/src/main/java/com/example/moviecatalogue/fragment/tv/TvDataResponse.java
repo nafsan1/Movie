@@ -10,6 +10,7 @@ public class TvDataResponse {
     @SerializedName("results")
     @Expose
     private List<Tv> tv = null;
+
     public TvDataResponse(List<Tv> tv ){
         this.tv = tv;
     }

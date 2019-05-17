@@ -12,5 +12,7 @@
     <string name="failed">Gagal</string>
     <string name="no_favourite_movie">Tidak ada film favorit</string>
     <string name="no_favourite_tv">Tidak ada acara tv favorit</string>
+    <string name="daily_message">Halo kamu mau nonton apa hari ini?</string>
+    <string name="settings">Pengaturan</string>
 
 </resources>
