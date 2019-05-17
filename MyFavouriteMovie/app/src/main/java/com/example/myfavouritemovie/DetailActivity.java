@@ -1,11 +1,13 @@
 package com.example.myfavouritemovie;
 
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -49,6 +51,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private ImageView img_movie_poster;
     private TextView txt_movie_name, txt_movie_date, txt_movie_overview, txt_vote;
     private Uri uri;
+    private ContentResolver resolver;
 
 
     @Override
@@ -66,6 +69,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         image_fav.bringToFront();
         tvMovieHelper = TvMovieHelper.getInstance(getApplicationContext());
         tvMovieHelper.open();
+        resolver = getContentResolver();
         code = getIntent().getIntExtra("code", 0);
         initToolbar();
 
@@ -186,7 +190,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 if (tvMovieHelper.getDataMovie(m.getId()).getCount() > 0) {
 
                     imageWhite();
-                    getContentResolver().delete(getIntent().getData(),null,null);
+                    resolver.delete(getIntent().getData(),null,null);
+                    resolver.notifyChange(CONTENT_URI_MOVIE, new MainActivity.DataObserver(new Handler(),this));
                     Toast.makeText(this, getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
 
                 } else {
@@ -203,7 +208,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                     values.put(ID_MOVIE, m.getId());
                     values.put(FAVOURITE_MOVIE, "yes");
                     values.put(TYPE_MOVIE, TYPE_TV_INTENT);
-                    getContentResolver().insert(CONTENT_URI_MOVIE, values);
+                    resolver.insert(CONTENT_URI_MOVIE, values);
+                    resolver.notifyChange(CONTENT_URI_MOVIE, new MainActivity.DataObserver(new Handler(),this));
                     imageRed();
                     Toast.makeText(this, getResources().getString(R.string.add), Toast.LENGTH_SHORT).show();
 

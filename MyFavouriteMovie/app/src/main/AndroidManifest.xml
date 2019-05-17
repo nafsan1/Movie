@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.myfavouritemovie">
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.dicoding.picodiploma.mynotesapp.READ_DATABASE" />
-    <uses-permission android:name="com.dicoding.picodiploma.mynotesapp.WRITE_DATABASE" />
+    <uses-permission android:name="com.example.providermoviecatalogue.READ_DATABASE" />
+    <uses-permission android:name="com.example.providermoviecatalogue.WRITE_DATABASE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,6 +24,13 @@
             android:name=".DetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask" />
+        <!--<provider
+            android:authorities="com.example.providermoviecatalogue"
+            android:name=".sqlite.MovieProvider"
+            android:exported="true"
+            android:multiprocess="true"
+            android:readPermission="com.example.providermoviecatalogue.READ_DATABASE"
+            android:writePermission="com.example.providermoviecatalogue.WRITE_DATABASE" />-->
     </application>
 
 
