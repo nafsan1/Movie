@@ -27,10 +27,7 @@ public class DatabaseContracts {
         static String POSTER_PATH_TV = "posterPath";
         static String FAVOURITE_TV = "favourite";
         static String TYPE_TV = "type";
-
     }
-
-
 
     public static final class MovieColumns implements BaseColumns {
         public static String VOTE_AVERAGE_MOVIE = "voteAverage";
