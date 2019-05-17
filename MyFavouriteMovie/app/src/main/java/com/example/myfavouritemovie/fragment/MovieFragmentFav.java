@@ -1,14 +1,17 @@
 package com.example.myfavouritemovie.fragment;
 
 
+import android.content.ContentResolver;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import static android.support.constraint.Constraints.TAG;
 import static com.example.myfavouritemovie.MainActivity.EXTRA_CATALOG;
+import static com.example.myfavouritemovie.sqlite.DatabaseContracts.AUTHORITY;
 import static com.example.myfavouritemovie.sqlite.DatabaseContracts.MovieColumns.CONTENT_URI_MOVIE;
+import static com.example.myfavouritemovie.sqlite.DatabaseContracts.TABLE_MOVIE;
 import static com.example.myfavouritemovie.sqlite.MappingHelper.mapCursorToArrayList;
 
 /**
@@ -58,7 +64,7 @@ public class MovieFragmentFav extends Fragment {
         recycleView.setLayoutManager(layoutManager);
         recycleView.setAdapter(adapter);
 
-        initComponent();
+        //initComponent();
 
         if (savedInstanceState == null){
             Cursor cursor = getActivity().getContentResolver().query(CONTENT_URI_MOVIE, null, null, null, null);
@@ -83,7 +89,23 @@ public class MovieFragmentFav extends Fragment {
         super.onResume();
 
     }
+    private void listEntries(ContentResolver cr) {
+        Uri uri = Uri.parse("content://" + AUTHORITY + "/" +TABLE_MOVIE);
+        Cursor c = cr.query(uri, null, null, null, null);
 
+        if (c == null) {
+            Log.d("FRAGMEN", "Cursor c == null.");
+            return;
+        }
+        while (c.moveToNext()) {
+            String column1 = c.getString(0);
+            String column2 = c.getString(1);
+            String column3 = c.getString(2);
+
+            Log.d("FRAGMEN", "column1=" + column1 + " column2=" + column2 + " column3=" + column3);
+        }
+        c.close();
+    }
     private void initComponent() {
         //list.addAll(tvMovieHelper.getListMovie());
 

@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
 
 public class DatabaseContracts {
     static String TABLE_TV = "tabeltv";
-    static String TABLE_MOVIE = "tabelmovie";
+    public static String TABLE_MOVIE = "tabelmovie";
     public static final String AUTHORITY = "com.example.providermoviecatalogue";
 
     private DatabaseContracts() {
