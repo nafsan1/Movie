@@ -186,17 +186,17 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 }
             } else if (code == TYPE_MOVIE_INTENT) {
                 if (tvMovieHelper.getDataMovie(m.getId()).getCount() > 0) {
-                    long result = tvMovieHelper.deleteMovie(m.getId());
+                    //long result = tvMovieHelper.deleteMovie(m.getId());
 
-                    if (result > 0) {
+                    //if (result > 0) {
                         imageWhite();
                         getContentResolver().delete(getIntent().getData(),null,null);
                         Toast.makeText(this, getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                    }
+                   // } else {
+                       // Toast.makeText(this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                    //}
                 } else {
-                    long result = tvMovieHelper.insertMovie(m);
+                    //long result = tvMovieHelper.insertMovie(m);
                     ContentValues values = new ContentValues();
                     values.put(VOTE_AVERAGE_MOVIE, m.getVoteAverage());
                     values.put(TITLE_MOVIE, m.getTitle());
@@ -209,13 +209,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                     values.put(ID_MOVIE, m.getId());
                     values.put(FAVOURITE_MOVIE, "yes");
                     values.put(TYPE_MOVIE, TYPE_TV_INTENT);
-                    if (result > 0) {
+                    //if (result > 0) {
                         getContentResolver().insert(CONTENT_URI_MOVIE, values);
                         imageRed();
                         Toast.makeText(this, getResources().getString(R.string.add), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                    }
+                   // } else {
+                       // Toast.makeText(this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                   // }
                 }
             }
         }

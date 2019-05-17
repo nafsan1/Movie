@@ -2,6 +2,7 @@ package com.example.providermoviecatalogue.fragment.favourite.movies;
 
 
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.providermoviecatalogue.MainActivity.EXTRA_CATALOG;
+import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.CONTENT_URI_MOVIE;
+import static com.example.providermoviecatalogue.sqlite.MappingHelper.mapCursorToArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,15 +51,28 @@ public class MovieFragmentFav extends Fragment {
         txt_movie = view.findViewById(R.id.txt_movie);
         tvMovieHelper = TvMovieHelper.getInstance(getContext().getApplicationContext());
         tvMovieHelper.open();
+        adapter = new AdapterMovie(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recycleView.setLayoutManager(layoutManager);
+        recycleView.setAdapter(adapter);
+
         initComponent();
+
         if (savedInstanceState == null){
-            adapter.setListMovie(tvMovieHelper.getListMovie());
+            Cursor cursor = getActivity().getContentResolver().query(CONTENT_URI_MOVIE, null, null, null, null);
+            list = mapCursorToArrayList(cursor);
+            if (list.size()> 0) {
+                adapter.setListMovie(list);
+            }else {
+                adapter.setListMovie(new ArrayList<Movie>());
+            }
         }else {
             List<Movie> list = savedInstanceState.getParcelableArrayList(EXTRA_CATALOG);
             if (list != null){
                 adapter.setListMovie(list);
             }
         }
+        adapter.notifyDataSetChanged();
         return view;
     }
 
@@ -64,19 +80,11 @@ public class MovieFragmentFav extends Fragment {
     public void onResume() {
         super.onResume();
 
-
-
     }
 
     private void initComponent() {
-        list.clear();
-        list.addAll(tvMovieHelper.getListMovie());
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        recycleView.setLayoutManager(layoutManager);
-        adapter = new AdapterMovie(getActivity());
+        //list.addAll(tvMovieHelper.getListMovie());
 
-        recycleView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
 
     }
 

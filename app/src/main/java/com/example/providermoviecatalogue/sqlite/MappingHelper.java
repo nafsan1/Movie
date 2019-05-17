@@ -5,6 +5,7 @@ import android.database.Cursor;
 import com.example.providermoviecatalogue.fragment.movie.Movie;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static android.provider.BaseColumns._ID;
 import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.ID_MOVIE;
@@ -18,8 +19,8 @@ import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieC
 import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.VOTE_AVERAGE_MOVIE;
 
 public class MappingHelper {
-    public static ArrayList<Movie> mapCursorToArrayList(Cursor notesCursor) {
-        ArrayList<Movie> notesList = new ArrayList<>();
+    public static List<Movie> mapCursorToArrayList(Cursor notesCursor) {
+        List<Movie> notesList = new ArrayList<>();
         while (notesCursor.moveToNext()) {
             int id = notesCursor.getInt(notesCursor.getColumnIndexOrThrow(_ID));
             double voteAverage = notesCursor.getDouble(notesCursor.getColumnIndexOrThrow(VOTE_AVERAGE_MOVIE));
