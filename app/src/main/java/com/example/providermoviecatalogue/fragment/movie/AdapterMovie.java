@@ -1,5 +1,6 @@
 package com.example.providermoviecatalogue.fragment.movie;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -51,7 +52,7 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.CategoryView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterMovie.CategoryViewHolder holder, final int i) {
+    public void onBindViewHolder(@NonNull AdapterMovie.CategoryViewHolder holder, @SuppressLint("RecyclerView") final int i) {
         final Movie m = getListMovie().get(i);
         holder.txt_movie_name.setText(getListMovie().get(i).getOriginalTitle());
         holder.txt_movie_overview.setText(getListMovie().get(i).getOverview());
@@ -63,14 +64,14 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.CategoryView
         holder.linear_movie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                Intent intent = new Intent(context, DetailActivity.class);
                 Uri uri = Uri.parse(CONTENT_URI_MOVIE + "/"+getListMovie().get(i).getId());
-
-                Intent i = new Intent(context, DetailActivity.class);
-
-                i.setData(uri);
-                i.putExtra(EXTRA_MOVIES, m);
-                i.putExtra("code", TYPE_MOVIE_INTENT);
-                context.startActivity(i);
+                intent.setData(uri);
+                intent.putExtra(EXTRA_MOVIES, m);
+                intent.putExtra("code", TYPE_MOVIE_INTENT);
+                context.startActivity(intent);
             }
         });
     }

@@ -88,6 +88,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private void setDataMovie() {
         m = getIntent().getParcelableExtra(EXTRA_MOVIES);
         uri = getIntent().getData();
+        if (uri != null){
+            Toast.makeText(this, "uri tidak null", Toast.LENGTH_SHORT).show();
+        }
         Cursor cursor = getContentResolver().query(uri,null,null,null,null);
         if (cursor != null){
             if (cursor.moveToFirst()) m =new Movie(cursor);

@@ -1,10 +1,12 @@
 package com.example.providermoviecatalogue.sqlite;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
 import static android.service.notification.Condition.SCHEME;
+
 
 public class DatabaseContracts {
     static String TABLE_TV = "tabeltv";
@@ -42,7 +44,8 @@ public class DatabaseContracts {
         public static String ID_MOVIE = "id";
         public static String FAVOURITE_MOVIE = "favourite";
         public static String TYPE_MOVIE = "type";
-        public static final Uri CONTENT_URI_MOVIE = new Uri.Builder().scheme(SCHEME)
+
+        public static final Uri CONTENT_URI_MOVIE = new Uri.Builder().scheme("content")
                 .authority(AUTHORITY)
                 .appendPath(TABLE_MOVIE)
                 .build();

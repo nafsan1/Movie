@@ -22,6 +22,7 @@
             android:authorities="com.example.providermoviecatalogue"
             android:name=".sqlite.MovieProvider"
             android:exported="true"
+            android:multiprocess="true"
             android:readPermission="com.example.providermoviecatalogue.READ_DATABASE"
             android:writePermission="com.example.providermoviecatalogue.WRITE_DATABASE" />
 

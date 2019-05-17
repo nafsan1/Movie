@@ -21,9 +21,9 @@ public class MovieProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     private TvMovieHelper tvMovieHelper;
     static {
-        // content://com.dicoding.picodiploma.mynotesapp/note
+        // content://com.example.providermoviecatalogue/note
         sUriMatcher.addURI(AUTHORITY, TABLE_MOVIE, NOTE);
-        // content://com.dicoding.picodiploma.mynotesapp/note/id
+        // content://com.example.providermoviecatalogue/note/id
         sUriMatcher.addURI(AUTHORITY, TABLE_MOVIE + "/#", NOTE_ID);
     }
     @Override
