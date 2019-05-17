@@ -49,6 +49,8 @@ public class Movie implements Parcelable {
     @Expose
     private Integer id;
 
+
+
     public Movie (double voteAverage, String title, double popularity, String posterPath, String originalLanguage, String originalTitle,
                   String overview, String releaseDate, Integer id){
         this.voteAverage = voteAverage;

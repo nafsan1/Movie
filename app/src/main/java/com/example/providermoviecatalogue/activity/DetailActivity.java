@@ -1,6 +1,7 @@
 package com.example.providermoviecatalogue.activity;
 
 
+import android.content.ContentValues;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
@@ -26,6 +27,18 @@ import com.example.providermoviecatalogue.sqlite.TvMovieHelper;
 import static com.example.providermoviecatalogue.MainActivity.EXTRA_MOVIES;
 import static com.example.providermoviecatalogue.MainActivity.TYPE_MOVIE_INTENT;
 import static com.example.providermoviecatalogue.MainActivity.TYPE_TV_INTENT;
+import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.CONTENT_URI_MOVIE;
+import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.FAVOURITE_MOVIE;
+import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.ID_MOVIE;
+import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.ORIGINAL_LANGUAGE_MOVIE;
+import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.ORIGINAL_TITLE_MOVIE;
+import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.OVERVIEW_MOVIE;
+import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.POPULAR_MOVIE;
+import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.POSTER_PATH_MOVIE;
+import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.RELEASE_MOVIE;
+import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.TITLE_MOVIE;
+import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.TYPE_MOVIE;
+import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.VOTE_AVERAGE_MOVIE;
 
 @SuppressWarnings("ALL")
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -75,7 +88,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private void setDataMovie() {
         m = getIntent().getParcelableExtra(EXTRA_MOVIES);
         uri = getIntent().getData();
-
+        Cursor cursor = getContentResolver().query(uri,null,null,null,null);
+        if (cursor != null){
+            if (cursor.moveToFirst()) m =new Movie(cursor);
+            cursor.close();
+        }else {
+            Toast.makeText(this, "Gagal update content provider", Toast.LENGTH_SHORT).show();
+        }
         txt_movie_name.setText(m.getOriginalTitle());
         txt_movie_date.setText(m.getReleaseDate());
         txt_movie_overview.setText(m.getOverview());
@@ -175,15 +194,20 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 } else {
                     long result = tvMovieHelper.insertMovie(m);
-                    Cursor cursor = getContentResolver().query(uri,null,null,null,null);
-                    if (cursor != null){
-                        if (cursor.moveToFirst()) m =new Movie(cursor);
-                        cursor.close();
-                    }else {
-                        Toast.makeText(this, "Gagal update content provider", Toast.LENGTH_SHORT).show();
-                    }
+                    ContentValues values = new ContentValues();
+                    values.put(VOTE_AVERAGE_MOVIE, m.getVoteAverage());
+                    values.put(TITLE_MOVIE, m.getTitle());
+                    values.put(POPULAR_MOVIE, m.getPopularity());
+                    values.put(POSTER_PATH_MOVIE, m.getPosterPath());
+                    values.put(ORIGINAL_LANGUAGE_MOVIE, m.getOriginalLanguage());
+                    values.put(ORIGINAL_TITLE_MOVIE, m.getOriginalTitle());
+                    values.put(OVERVIEW_MOVIE, m.getOverview());
+                    values.put(RELEASE_MOVIE, m.getReleaseDate());
+                    values.put(ID_MOVIE, m.getId());
+                    values.put(FAVOURITE_MOVIE, "yes");
+                    values.put(TYPE_MOVIE, TYPE_TV_INTENT);
                     if (result > 0) {
-
+                        getContentResolver().insert(CONTENT_URI_MOVIE, values);
                         imageRed();
                         Toast.makeText(this, getResources().getString(R.string.add), Toast.LENGTH_SHORT).show();
                     } else {

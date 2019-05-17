@@ -22,6 +22,8 @@ import com.example.providermoviecatalogue.fragment.favourite.FavouriteFragment;
 import com.example.providermoviecatalogue.fragment.movie.MovieFragment;
 import com.example.providermoviecatalogue.fragment.tv.TvFragment;
 
+import static com.example.providermoviecatalogue.sqlite.DatabaseContracts.MovieColumns.CONTENT_URI_MOVIE;
+
 @SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity {
     public static String EXTRA_MOVIES = "MOVIESHERO";
@@ -94,7 +96,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
+        handlerThread = new HandlerThread("DataObserver");
+        handlerThread.start();
+        Handler handler = new Handler(handlerThread.getLooper());
+        myObserver = new DataObserver(handler, this);
+        getContentResolver().registerContentObserver(CONTENT_URI_MOVIE, true, myObserver);
 
         //initToolbar();
         frameLayout = findViewById(R.id.content_main);

@@ -66,6 +66,7 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.CategoryView
                 Uri uri = Uri.parse(CONTENT_URI_MOVIE + "/"+getListMovie().get(i).getId());
 
                 Intent i = new Intent(context, DetailActivity.class);
+
                 i.setData(uri);
                 i.putExtra(EXTRA_MOVIES, m);
                 i.putExtra("code", TYPE_MOVIE_INTENT);

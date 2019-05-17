@@ -192,7 +192,7 @@ public class TvMovieHelper {
 
     public Cursor queryByIdProvider(String id) {
         return database.query(TABLE_MOVIE, null
-                , _ID + " = ?"
+                , ID_MOVIE + " = ?"
                 , new String[]{id}
                 , null
                 , null
@@ -207,7 +207,7 @@ public class TvMovieHelper {
                 , null
                 , null
                 , null
-                , _ID + " ASC");
+                , ID_MOVIE + " ASC");
     }
 
     public long insertProvider(ContentValues values) {
@@ -215,10 +215,10 @@ public class TvMovieHelper {
     }
 
     public int updateProvider(String id, ContentValues values) {
-        return database.update(TABLE_MOVIE, values, _ID + " = ?", new String[]{id});
+        return database.update(TABLE_MOVIE, values, ID_MOVIE + " = ?", new String[]{id});
     }
 
     public int deleteProvider(String id) {
-        return database.delete(TABLE_MOVIE, _ID + " = ?", new String[]{id});
+        return database.delete(TABLE_MOVIE, ID_MOVIE + " = ?", new String[]{id});
     }
 }

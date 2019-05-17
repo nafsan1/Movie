@@ -21,7 +21,7 @@ import com.example.providermoviecatalogue.sqlite.TvMovieHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.moviecatalogue.MainActivity.EXTRA_CATALOG;
+import static com.example.providermoviecatalogue.MainActivity.EXTRA_CATALOG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,10 +29,10 @@ import static com.example.moviecatalogue.MainActivity.EXTRA_CATALOG;
 public class MovieFragmentFav extends Fragment {
 
 
+
     public MovieFragmentFav() {
         // Required empty public constructor
     }
-
     private RecyclerView recycleView;
     private List<Movie> list = new ArrayList<>();
     private TvMovieHelper tvMovieHelper;
@@ -48,12 +48,12 @@ public class MovieFragmentFav extends Fragment {
         txt_movie = view.findViewById(R.id.txt_movie);
         tvMovieHelper = TvMovieHelper.getInstance(getContext().getApplicationContext());
         tvMovieHelper.open();
-        adapter = new AdapterMovie(getActivity());
-        if (savedInstanceState == null) {
+        initComponent();
+        if (savedInstanceState == null){
             adapter.setListMovie(tvMovieHelper.getListMovie());
-        } else {
+        }else {
             List<Movie> list = savedInstanceState.getParcelableArrayList(EXTRA_CATALOG);
-            if (list != null) {
+            if (list != null){
                 adapter.setListMovie(list);
             }
         }
@@ -63,20 +63,21 @@ public class MovieFragmentFav extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        initComponent();
+
+
 
     }
 
     private void initComponent() {
+        list.clear();
+        list.addAll(tvMovieHelper.getListMovie());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recycleView.setLayoutManager(layoutManager);
+        adapter = new AdapterMovie(getActivity());
+
         recycleView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        if (tvMovieHelper.getListMovie().size() > 0) {
-            txt_movie.setVisibility(View.GONE);
-        } else {
-            txt_movie.setVisibility(View.VISIBLE);
-        }
+
     }
 
     @Override
@@ -88,7 +89,7 @@ public class MovieFragmentFav extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(EXTRA_CATALOG, (ArrayList<? extends Parcelable>) adapter.getListMovie());
+        outState.putParcelableArrayList(EXTRA_CATALOG,(ArrayList<? extends Parcelable>) adapter.getListMovie());
     }
 
     @Override
