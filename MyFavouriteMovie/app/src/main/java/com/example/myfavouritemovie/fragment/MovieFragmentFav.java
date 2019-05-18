@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import static android.support.constraint.Constraints.TAG;
 import static com.example.myfavouritemovie.MainActivity.EXTRA_CATALOG;
 import static com.example.myfavouritemovie.sqlite.DatabaseContracts.AUTHORITY;
 import static com.example.myfavouritemovie.sqlite.DatabaseContracts.MovieColumns.CONTENT_URI_MOVIE;

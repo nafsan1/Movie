@@ -7,18 +7,18 @@ import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.design.widget.TabLayout;
+
+
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.example.myfavouritemovie.adapter.PagerAdapter;
+import com.example.myfavouritemovie.adapter.PagerAdapterMovie;
 
 import static com.example.myfavouritemovie.sqlite.DatabaseContracts.MovieColumns.CONTENT_URI_MOVIE;
+
 
 public class MainActivity extends AppCompatActivity {
     public static String EXTRA_MOVIES = "MOVIESHERO";
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     public static int TYPE_MOVIE_INTENT = 102;
     public static final String EXTRA_CATALOG = "EXTRA_CATALOG";
     private TabLayout tabLayout;
-    PagerAdapter pagerAdapter;
+    PagerAdapterMovie pagerAdapter;
     ViewPager viewPager;
     private DataObserver myObserver;
     private static HandlerThread handlerThread;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tab_layout);
-        pagerAdapter = new PagerAdapter(this.getSupportFragmentManager(), tabLayout.getTabCount());
+        pagerAdapter = new PagerAdapterMovie(this.getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
         iniComponent();
         initToolbar();

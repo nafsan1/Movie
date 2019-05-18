@@ -8,11 +8,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.example.myfavouritemovie.fragment.MovieFragmentFav;
 import com.example.myfavouritemovie.fragment.TvFragmentFav;
 
-public class PagerAdapter extends FragmentStatePagerAdapter {
+public class PagerAdapterMovie extends FragmentStatePagerAdapter {
 
     private int number_tabs;
 
-    public PagerAdapter(FragmentManager fm, int number_tabs) {
+    public PagerAdapterMovie(FragmentManager fm, int number_tabs) {
         super(fm);
         this.number_tabs = number_tabs;
     }
