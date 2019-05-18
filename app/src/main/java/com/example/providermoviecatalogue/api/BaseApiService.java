@@ -6,6 +6,7 @@ import com.example.providermoviecatalogue.fragment.tv.TvDataResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface BaseApiService {
 
@@ -17,8 +18,14 @@ public interface BaseApiService {
     /*@GET("v0/topstories.json")
         Call <List<Integer>>getTopstories();*/
 
-    @GET("movie?api_key=403a22d62769b2f5b28ce5321b91690f&language=en-US")
+    @GET("discover/movie?api_key=403a22d62769b2f5b28ce5321b91690f&language=en-US")
     Call<MovieDataResponse> getMovie();
-    @GET("tv?api_key=403a22d62769b2f5b28ce5321b91690f&language=en-US")
+    @GET("discover/tv?api_key=403a22d62769b2f5b28ce5321b91690f&language=en-US")
     Call<TvDataResponse> getTv();
+    @GET("search/movie?api_key=403a22d62769b2f5b28ce5321b91690f&language=en-US")
+    Call<MovieDataResponse> getSearchMovie(@Query("query") String name);
+    @GET("search/movie?api_key=403a22d62769b2f5b28ce5321b91690f&language=en-US")
+    Call<TvDataResponse> getSearchTv(@Query("query") String name);
+    @GET("discover/movie?api_key=403a22d62769b2f5b28ce5321b91690f&upcoming")
+    Call<MovieDataResponse> getMovieRelease();
 }
