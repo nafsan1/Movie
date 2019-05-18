@@ -23,7 +23,7 @@ public class MoviePresenter {
         this.listMovieResponse = listMovieResponse;
 
     }
-    void searchDataMovie(String name){
+    /*void searchDataMovie(String name){
         view.showProgress();
         listMovie.clear();
         listMovieResponse.clear();
@@ -72,7 +72,7 @@ public class MoviePresenter {
                 view.hideProgress();
             }
         });
-    }
+    }*/
     void showData() {
         listMovieResponse.clear();
         listMovie.clear();
