@@ -1,5 +1,7 @@
 package com.example.movieprovider.fragment.tv;
 
+import com.example.movieprovider.fragment.movie.Movie;
+import com.example.movieprovider.fragment.tv.Tv;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,7 +11,6 @@ public class TvDataResponse {
     @SerializedName("results")
     @Expose
     private List<Tv> tv = null;
-
     public TvDataResponse(List<Tv> tv ){
         this.tv = tv;
     }

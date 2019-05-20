@@ -7,5 +7,4 @@ public interface MovieView {
     void hideProgress();
     void getDataMovie(List<Movie> listMovie);
     void onAddError(String message);
-
 }

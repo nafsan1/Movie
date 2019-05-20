@@ -1,5 +1,6 @@
 package com.example.myfavouritemovie;
 
+
 import android.content.Context;
 import android.database.ContentObserver;
 import android.graphics.Color;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.example.movieprovider.R;
 import com.example.myfavouritemovie.adapter.PagerAdapterMovie;
 
 import static com.example.myfavouritemovie.sqlite.DatabaseContracts.MovieColumns.CONTENT_URI_MOVIE;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         Handler handler = new Handler(handlerThread.getLooper());
         myObserver = new DataObserver(handler, this);
         getContentResolver().registerContentObserver(CONTENT_URI_MOVIE, true, myObserver);
+        //getContentResolver().notifyChange(CONTENT_URI_MOVIE, null,false);
     }
     @Override
     public void onResume() {

@@ -159,10 +159,26 @@ public class TvMovieHelper {
                 cursor.moveToNext();
             } while (!cursor.isAfterLast());
         }
-        cursor.close();
+        //cursor.close();
         return list;
     }
+    public List<String> getAllPosterMovie() {
+        List<String> list = new ArrayList<>();
+        String sql = "SELECT "+POSTER_PATH_MOVIE+" FROM " + TABLE_MOVIE+" Union ALL SELECT "+POSTER_PATH_TV +" FROM "+TABLE_TV;
+        Cursor c = database.rawQuery(sql, null);
 
+        c.moveToFirst();
+        if (c.getCount() > 0) {
+            do {
+                String poster_path = c.getString(c.getColumnIndex(POSTER_PATH_MOVIE));
+                list.add(poster_path);
+                c.moveToNext();
+            }
+            while (!c.isAfterLast());
+        }
+        c.close();
+        return list;
+    }
     public long insertTv(Tv tv) {
         ContentValues args = new ContentValues();
         args.put(ORIGINAL_NAME_TV, tv.getOriginalName());

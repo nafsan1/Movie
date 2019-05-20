@@ -46,7 +46,7 @@ public class TvFragmentFav extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        initComponent();
+        //initComponent();
     }
 
     private void initComponent() {

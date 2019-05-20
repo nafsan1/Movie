@@ -4,6 +4,7 @@ package com.example.movieprovider.fragment.movie;
 
 import com.example.movieprovider.api.BaseApiService;
 import com.example.movieprovider.api.UtilsAPI;
+import com.example.movieprovider.fragment.movie.MovieDataResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +19,12 @@ public class MoviePresenter {
     private List<MovieDataResponse> listMovieResponse = new ArrayList<>();
 
 
-    public MoviePresenter(MovieView view,List<MovieDataResponse> listMovieResponse) {
+    public MoviePresenter(MovieView view, List<MovieDataResponse> listMovieResponse) {
         this.view = view;
         this.listMovieResponse = listMovieResponse;
 
     }
-    /*void searchDataMovie(String name){
+    void searchDataMovie(String name){
         view.showProgress();
         listMovie.clear();
         listMovieResponse.clear();
@@ -72,10 +73,9 @@ public class MoviePresenter {
                 view.hideProgress();
             }
         });
-    }*/
+    }
     void showData() {
         listMovieResponse.clear();
-        listMovie.clear();
         view.showProgress();
         BaseApiService mApiService = UtilsAPI.getApiService();
         mApiService.getMovie().enqueue(new Callback<MovieDataResponse>() {

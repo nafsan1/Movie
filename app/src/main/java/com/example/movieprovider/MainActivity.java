@@ -22,6 +22,7 @@ import com.example.movieprovider.fragment.favourite.FavouriteFragment;
 import com.example.movieprovider.fragment.movie.MovieFragment;
 import com.example.movieprovider.fragment.tv.TvFragment;
 
+
 import static com.example.movieprovider.sqlite.DatabaseContracts.MovieColumns.CONTENT_URI_MOVIE;
 
 @SuppressWarnings("ALL")

@@ -1,5 +1,6 @@
 package com.example.movieprovider.fragment.movie;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
