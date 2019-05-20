@@ -13,9 +13,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import com.example.movieprovider.R;
+
 import com.example.myfavouritemovie.DetailActivity;
 
+import com.example.myfavouritemovie.R;
 import com.example.myfavouritemovie.model.Tv;
 
 import java.util.ArrayList;

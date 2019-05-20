@@ -19,7 +19,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
-import com.example.movieprovider.R;
 import com.example.myfavouritemovie.model.Movie;
 import com.example.myfavouritemovie.model.Tv;
 import com.example.myfavouritemovie.sqlite.TvMovieHelper;

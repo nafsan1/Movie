@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.example.movieprovider.R;
 import com.example.myfavouritemovie.adapter.PagerAdapterMovie;
 
 import static com.example.myfavouritemovie.sqlite.DatabaseContracts.MovieColumns.CONTENT_URI_MOVIE;
