@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_CATALOG = "EXTRA_CATALOG";
     private DataObserver myObserver;
     private static HandlerThread handlerThread;
+    private String a;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
