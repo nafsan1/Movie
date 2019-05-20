@@ -12,7 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.myfavouritemovie.R;
+
+import com.example.movieprovider.R;
 import com.example.myfavouritemovie.adapter.AdapterTv;
 import com.example.myfavouritemovie.model.Tv;
 import com.example.myfavouritemovie.sqlite.TvMovieHelper;
