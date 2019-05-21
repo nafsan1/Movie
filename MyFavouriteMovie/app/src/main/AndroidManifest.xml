@@ -5,8 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.example.movieprovider.READ_DATABASE" />
     <uses-permission android:name="com.example.movieprovider.WRITE_DATABASE" />
-    <uses-permission android:name="om.example.movieprovider.READ_DATABASE" android:protectionLevel="normal" />
-    <uses-permission android:name="om.example.movieprovider.WRITE_DATABASE" android:protectionLevel="normal" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
